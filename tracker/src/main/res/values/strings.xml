@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GPS Tracker Lite</string>
+
+    <string name="tab_tracking">Tracking</string>
+    <string name="tab_waypoints">Waypoints</string>
+
+    <string name="status_idle">Idle</string>
+    <string name="status_active">Logging every %1$d min — %2$d points so far, started %3$s</string>
+
+    <string name="action_start">Start</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_quick_save">Quick Save</string>
+    <string name="action_export">Export</string>
+    <string name="action_export_all">Export all</string>
+    <string name="action_share">Share</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_open_in_maps">Open in Maps</string>
+
+    <string name="interval_label">Logging interval</string>
+    <string name="interval_help">Minimum interval is 15 minutes, the fastest Android allows for battery-friendly background scheduling.</string>
+
+    <string name="permission_foreground_rationale">GPS Tracker Lite needs location access to log your position.</string>
+    <string name="permission_background_rationale">To keep logging while the app is in the background, choose \"Allow all the time\" on the next screen.</string>
+
+    <string name="battery_optimization_banner">This device may pause background logging to save battery. Tap to allow GPS Tracker Lite to run unrestricted.</string>
+
+    <string name="quick_save_default_name">Waypoint %1$s</string>
+    <string name="session_default_name">Track %1$s</string>
+</resources>

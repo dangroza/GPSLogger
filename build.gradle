@@ -2,10 +2,16 @@
 
 buildscript {
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
+        jcenter() // legacy :app dependencies only (com.android.support:*, pre-AndroidX)
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        // AGP/Kotlin versions below are required by the new :tracker module (Kotlin + AndroidX + Compose).
+        // :app's source/logic is unchanged; only its build.gradle got the mechanical `compile`->`implementation`
+        // rename (deprecated configs removed in AGP 7.0+) and a `namespace` entry (required by AGP 8+).
+        classpath 'com.android.tools.build:gradle:8.1.4'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -14,7 +20,9 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
+        jcenter() // legacy :app dependencies only (com.android.support:*, pre-AndroidX)
     }
 }
 

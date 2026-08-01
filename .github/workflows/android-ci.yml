@@ -43,11 +43,32 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
+      - name: Validate baseline collector
+        run: bash -n scripts/collect-android-baseline.sh
+
       - name: Print build environment
         run: ./gradlew --version
 
       - name: Build debug APK
         run: ./gradlew clean assembleDebug --stacktrace --no-daemon
+
+      - name: Verify debug APK identity
+        shell: bash
+        run: |
+          APK="$(find app/build/outputs/apk/debug -maxdepth 1 -type f -name '*.apk' -print -quit)"
+          test -n "$APK"
+
+          SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          AAPT="$(find "$SDK_ROOT/build-tools" -type f -name aapt -perm -u+x | sort -V | tail -n 1)"
+          test -x "$AAPT"
+
+          BADGING="$("$AAPT" dump badging "$APK")"
+          printf '%s\n' "$BADGING"
+          grep -F "package: name='eu.basicairdata.graziano.gpslogger.dev'" <<<"$BADGING"
+          grep -F "application-label:'GPS Logger Dev'" <<<"$BADGING"
+
+          MANIFEST_TREE="$("$AAPT" dump xmltree "$APK" AndroidManifest.xml)"
+          grep -F "eu.basicairdata.graziano.gpslogger.dev.fileprovider" <<<"$MANIFEST_TREE"
 
       - name: Run unit tests
         run: ./gradlew testDebugUnitTest --stacktrace --no-daemon

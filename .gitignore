@@ -43,3 +43,6 @@ local.properties
 
 # Local documentation bloating folder
 /documentation
+
+# Local device performance captures
+/baseline-results/

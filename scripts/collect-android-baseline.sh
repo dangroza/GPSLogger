@@ -122,15 +122,19 @@ if [[ "$MODE" == "prepare" ]]; then
   exit 0
 fi
 
-PACKAGE_DUMP="$OUT_DIR/package.txt"
-"$ADB_BIN" shell dumpsys package "$PACKAGE" >"$PACKAGE_DUMP" 2>&1 || true
-
-if grep -q "Unable to find package" "$PACKAGE_DUMP"; then
+PACKAGE_PATH="$($ADB_BIN shell pm path "$PACKAGE" 2>/dev/null | tr -d '\r' || true)"
+if [[ "$PACKAGE_PATH" != package:* ]]; then
   echo "Package $PACKAGE is not installed on the connected device." >&2
   exit 1
 fi
 
-PID="$($ADB_BIN shell pidof "$PACKAGE" 2>/dev/null | tr -d '\r' | awk '{print $1}')"
+echo "package_path=$PACKAGE_PATH" >>"$OUT_DIR/session.properties"
+
+PACKAGE_DUMP="$OUT_DIR/package.txt"
+"$ADB_BIN" shell dumpsys package "$PACKAGE" >"$PACKAGE_DUMP" 2>&1 || true
+
+PID_RAW="$($ADB_BIN shell pidof "$PACKAGE" 2>/dev/null || true)"
+PID="$(printf '%s' "$PID_RAW" | tr -d '\r' | awk '{print $1}')"
 {
   echo "pid=${PID:-not-running}"
   grep -E 'versionName=|versionCode=|firstInstallTime=|lastUpdateTime=' "$PACKAGE_DUMP" || true

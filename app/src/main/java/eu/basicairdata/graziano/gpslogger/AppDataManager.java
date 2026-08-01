@@ -51,7 +51,7 @@ public class AppDataManager {
 
     public boolean isLastOperationSuccessful = false;                                        // The outcome of the last operation carried out
 
-    private String appDataRootFolder = "/data/data/eu.basicairdata.graziano.gpslogger";
+    private final String appDataRootFolder = GPSApplication.getInstance().getApplicationInfo().dataDir;
     private String zipFileFolder = GPSApplication.getInstance().getPrefExportFolder();
 
 

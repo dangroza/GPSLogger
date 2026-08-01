@@ -45,7 +45,7 @@ The repository includes `scripts/collect-android-baseline.sh`.
 Prepare a scenario:
 
 ```bash
-./scripts/collect-android-baseline.sh --prepare --label walking-60m
+bash scripts/collect-android-baseline.sh --prepare --label walking-60m
 ```
 
 This clears logcat and resets Android batterystats. Start recording in GPS Logger Dev and perform the scenario.
@@ -53,7 +53,7 @@ This clears logcat and resets Android batterystats. Start recording in GPS Logge
 Collect the results:
 
 ```bash
-./scripts/collect-android-baseline.sh --collect --label walking-60m
+bash scripts/collect-android-baseline.sh --collect --label walking-60m
 ```
 
 Results are written under `baseline-results/`. This directory must remain local and must not contain personal routes in commits or pull requests.
@@ -61,7 +61,7 @@ Results are written under `baseline-results/`. This directory must remain local 
 Use another package when necessary:
 
 ```bash
-./scripts/collect-android-baseline.sh \
+bash scripts/collect-android-baseline.sh \
   --collect \
   --package eu.basicairdata.graziano.gpslogger \
   --label upstream-comparison

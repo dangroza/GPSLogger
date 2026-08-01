@@ -2,7 +2,10 @@
 
 <!--
   ~ colors.xml
-  ~ Created by G.Capelli (BasicAirData) on 8/6/2016
+  ~ Created by G.Capelli on 5/1/2020
+  ~ This file is part of BasicAirData GPS Logger
+  ~
+  ~ Copyright (C) 2011 BasicAirData
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -18,26 +21,48 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ======[ LIGHT THEME ]================================================================= -->
+
     <color name="colorPrimary">#880000</color>
     <color name="colorPrimaryDark">#550000</color>
     <color name="colorPrimaryLight">#b51111</color>
-    <color name="textColorPrimary">#ffffff</color>
-    <color name="textColorSecondary">#888888</color>
-    <color name="colorBackground">#111111</color>
-    <color name="colorTrackBackground">#282828</color>
+    <color name="textColorPrimary">#111111</color>
+    <color name="textColorCardTitle">#272727</color>
+    <color name="textColorSecondary">#666666</color>
+    <color name="colorBackground">#e9e9e9</color>
 
-    <color name="colorRoundedCornerDarktop">#202020</color>
-    <color name="colorRoundedCornerDarkBottom">#161616</color>
-    <color name="colorRoundedCornerDarkBorder">#707070</color>
+    <color name="colorRecControlBackground">#ffffff</color>
+    <color name="textColorRecControlPrimary">#555555</color>
+    <color name="textColorRecControlSecondary">#666666</color>
+    <color name="textColorRecControlDisabled">#cccccc</color>
+    <color name="textColorRecControlPrimary_Active">#e4e4e4</color>
+    <color name="textColorRecControlSecondary_Active">#cccccc</color>
 
-    <color name="colorCurrentTrackCardBackground">#202020</color>
-    <color name="colorCardBackground">#3b3b3b</color>
-    <color name="colorCardTrackBackground">#2f2f2f</color>
-    <color name="colorThumbnailLineColor">#d7d7d7</color>
-    <color name="colorThumbnailLineBackground">#161616</color>
+    <color name="colorIconDisabledOnDialog">#d0d0d0</color>
 
-    <color name="colorAccent">#dddddd</color>
-    <color name="preference_accent">#ca2222</color>
-    <color name="preference_fallback_accent_color">#ca2222</color>
+    <color name="colorCardBackground_Title">#ffffff</color>
+    <color name="colorCardBackground_Line">#f7f7f7</color>
+    <color name="colorCardBackground_Data">#fbfbfb</color>
+    <color name="colorCardBackground">#f7f7f7</color>
+    <color name="colorCardBackground_Selected">#5fff8888</color>
+
+    <color name="colorAccent">#000000</color>
+    <color name="preference_accent">#b51111</color>
+    <color name="preference_fallback_accent_color" tools:override="true">#b51111</color>
+
+    <color name="colorRoundedCornerBottom">#eeeeee</color>
+    <color name="colorRoundedCornerTop">#ffffff</color>
+    <color name="colorRoundedCornerBorder">#c7c7c7</color>
+
+    <!-- ======[ SHARED COLORS ]=============================================================== -->
+
+    <color name="colorThumbnailLineColor">#c9c9c9</color> <!-- DO NOT CHANGE THIS COLOR! -->
+
+    <!-- api 35 fix status bar color when action mode is active -->
+
+    <color name="abc_decor_view_status_guard" tools:override="true">#550000</color>
+    <color name="abc_decor_view_status_guard_light" tools:override="true">#550000</color>
+
 </resources>

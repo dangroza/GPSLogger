@@ -22,6 +22,7 @@ local.properties
 
 
 /out
+/*/release
 /*/build
 /*/*.iml
 *.iws
@@ -41,4 +42,4 @@ local.properties
 .externalNativeBuild
 
 # Local documentation bloating folder
-/doc
+/documentation

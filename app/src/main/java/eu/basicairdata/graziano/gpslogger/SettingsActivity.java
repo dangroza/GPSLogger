@@ -1,6 +1,9 @@
 /*
  * SettingsActivity - Java Class for Android
- * Created by G.Capelli (BasicAirData) on 23/7/2016
+ * Created by G.Capelli on 23/7/2016
+ * This file is part of BasicAirData GPS Logger
+ *
+ * Copyright (C) 2011 BasicAirData
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,40 +21,82 @@
 
 package eu.basicairdata.graziano.gpslogger;
 
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceManager;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
+/**
+ * The Activity that shows and manages the Preference Screen.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setDefaultNightMode(Integer.valueOf(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("prefColorTheme", "2")));
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_settings);
-
-        toolbar = (Toolbar) findViewById(R.id.id_toolbar2);
+        toolbar = findViewById(R.id.id_toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.menu_settings);
+        if (savedInstanceState == null) {
+            FragmentSettings wvf = new FragmentSettings();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.id_preferences, wvf);
+            ft.commit();
+        }
 
-        FragmentSettings wvf = new FragmentSettings();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.id_preferences, wvf);
-        ft.commit();
+
+        View abl = findViewById(R.id.id_appbarlayout2);
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar, (v, insets) -> {
+            Insets innerPadding = insets.getInsets(
+                    WindowInsetsCompat.Type.navigationBars() | WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout()
+            );
+            abl.setPadding(
+                    0,
+                    innerPadding.top,
+                    0,
+                    0
+            );
+            return insets;
+        });
+
+        View rootView = findViewById(android.R.id.content);
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+            Insets innerPadding = insets.getInsets(
+                    WindowInsetsCompat.Type.navigationBars() | WindowInsetsCompat.Type.statusBars() | WindowInsetsCompat.Type.displayCutout()
+            );
+            rootView.setPadding(
+                    innerPadding.left,
+                    0,
+                    innerPadding.right,
+                    innerPadding.bottom
+            );
+            return insets;
+        });
+
     }
 
     @Override
     public void onResume() {
-        Log.w("myApp", "[#] SettingsActivity.java - onResume()");
         super.onResume();
+        Log.w("myApp", "[#] SettingsActivity.java - onResume()");
     }
 
     @Override

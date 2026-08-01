@@ -24,3 +24,11 @@
     public static int d(...);
     public static int e(...);
 }
+
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+-dontobfuscate
